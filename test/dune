@@ -1,0 +1,7 @@
+(library
+ (name crackle_pop_test)
+ (libraries async core expect_test_helpers)
+ (inline_tests
+  (deps ../bin/main.exe))
+ (preprocess
+  (pps ppx_jane)))
