@@ -1,0 +1,5 @@
+(library
+ (name sexp_query)
+ (libraries core re)
+ (preprocess
+  (pps ppx_jane)))

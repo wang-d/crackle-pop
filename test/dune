@@ -1,6 +1,6 @@
 (library
  (name crackle_pop_test)
- (libraries async core expect_test_helpers)
+ (libraries async core expect_test_helpers sexp_query)
  (inline_tests
   (deps ../bin/main.exe))
  (preprocess

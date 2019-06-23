@@ -14,9 +14,9 @@ let crackle_pop i =
   |> Option.value ~default:(Int.to_string i)
 ;;
 
-let () =
+let simple =
   Command.async
-    ~summary:"Solve RC's Crackle Pop problem"
+    ~summary:"a simple CracklePop solution"
     (let%map_open.Command.Let_syntax () = return () in
      fun () ->
        List.init 100 ~f:(Int.( + ) 1)
@@ -24,5 +24,27 @@ let () =
        (* I assume they want me to print newlines too? *)
        |> List.iter ~f:print_endline;
        return ())
+;;
+
+let sexp_query =
+  Command.async
+    ~summary:""
+    (let%map_open.Command.Let_syntax () = return ()
+     and program =
+       anon ("PROGRAM" %: sexp_conv [%of_sexp: string Sexp_query.Generic.t])
+     in
+     fun () ->
+       let%bind input = Reader.contents (force Reader.stdin) in
+       Parsexp.Many.parse_string_exn input
+       |> Sequence.of_list
+       |> Sexp_query.Eval.f program
+       |> Sequence.iter ~f:print_s;
+       return ())
+;;
+
+let () =
+  Command.group
+    ~summary:"CracklePop solutions"
+    [ "sexp-query", sexp_query; "simple", simple ]
   |> Command.run
 ;;

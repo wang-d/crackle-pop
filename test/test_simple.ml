@@ -3,7 +3,7 @@ open! Async
 open! Import
 
 let%expect_test _ =
-  let%bind () = run "../bin/main.exe" [] in
+  let%bind () = run "../bin/main.exe" [ "simple" ] in
   [%expect
     {|
       1

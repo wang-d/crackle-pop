@@ -1,3 +1,0 @@
-(library
- (name crackle_pop)
- (libraries base))

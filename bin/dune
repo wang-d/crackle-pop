@@ -1,5 +1,5 @@
 (executable
  (name main)
- (libraries async core crackle_pop)
+ (libraries async core sexp_query)
  (preprocess
   (pps ppx_jane)))
